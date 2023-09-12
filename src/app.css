@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'Iosevka Sans';
+	src: url('/fonts/iosevka-web-sans.woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Iosevka Sans';
+	src: url('/fonts/iosevka-web-sans-bold.woff2');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+html {
+	@apply dark:bg-black dark:text-neutral-100;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 2em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+}
+
+h2 {
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+}
+
+p {
+	font-size: 1em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+a {
+	display: inline-block;
+	text-align: center;
+}
+a::before {
+	display: block;
+	content: attr(title);
+	font-weight: bold;
+	height: 1px;
+	color: transparent;
+	overflow: hidden;
+	visibility: hidden;
+}
