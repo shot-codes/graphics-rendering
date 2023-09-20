@@ -1,16 +1,36 @@
 <script lang="ts">
 	import '../app.css';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	// import 'highlight.js/styles/github.css';
 
-	let scrollY: number;
+	let stylesheetUrl: string;
+
+	onMount(() => {
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			stylesheetUrl = '/styles/hljs/dark.css'; // Replace with your dark theme stylesheet
+		} else {
+			stylesheetUrl = '/styles/hljs/light.css';
+		}
+
+		// Listen for changes in the user's preferred color scheme
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				stylesheetUrl = '/styles/hljs/dark.css'; // Replace with your dark theme stylesheet
+			} else {
+				stylesheetUrl = '/styles/hljs/light.css';
+			}
+		});
+	});
 </script>
 
-<svelte:window bind:scrollY />
+<svelte:head>
+	<link rel="stylesheet" href={stylesheetUrl} />
+</svelte:head>
 
 <div class="grid h-full grid-rows-[150px_1fr]">
 	<div
-		class="fixed top-0 w-full h-[40px] transition items-center flex justify-center bg-white bg-opacity-50 dark:bg-black dark:border-neutral-800 dark:bg-opacity-50 p-2 border-b backdrop-blur border-opacity-50 dark:border-opacity-50"
-		class:scrollTop={scrollY == 0}
+		class="fixed top-0 w-full h-[40px] items-center flex justify-center bg-white bg-opacity-50 dark:bg-black dark:bg-opacity-50 p-2 backdrop-blur"
 	>
 		<a href="/"> 02561/02562 JOURNAL - S155932 </a>
 	</div>
@@ -37,9 +57,3 @@
 
 	<slot />
 </div>
-
-<style lang="postcss">
-	.scrollTop {
-		@apply border-neutral-500 dark:border-neutral-500;
-	}
-</style>
