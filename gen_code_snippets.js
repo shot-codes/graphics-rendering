@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from 'fs/promises';
+import { readdir, readFile, writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import ts from 'typescript';
 
@@ -30,6 +30,14 @@ function visit(node, sourceFile) {
 	return result;
 }
 
+function formatCode(code) {
+	let lines = code.split('\n');
+	lines = lines.slice(1, -1);
+	lines = lines.map((line) => line.replace(/^\t\t/, ''));
+	code = lines.join('\n');
+	return code;
+}
+
 async function processFiles() {
 	for (const baseDir of baseDirs) {
 		const subDirs = (await readdir(baseDir, { withFileTypes: true }))
@@ -43,15 +51,17 @@ async function processFiles() {
 			const svelteFiles = files.filter((file) => /^Part\d+\.svelte$/.test(file));
 
 			for (const file of svelteFiles) {
-				console.log(file);
 				const data = await readFile(join(dir, file), 'utf8');
 				const regex = /<script[^>]*>((.|[\r\n])*?)<\/script>/;
 				const match = data.match(regex);
 				let sourceFile = ts.createSourceFile('file.ts', match[1], 7, true);
 				let result = visit(sourceFile, sourceFile);
-				console.log(result);
-
-				await writeFile(join(dir, file.replace('.svelte', '.txt')), `${result}\n`);
+				const staticDir = dir.replace('src', 'static').replace('routes', 'source');
+				await mkdir(staticDir, { recursive: true });
+				await writeFile(
+					join(staticDir, file.replace('.svelte', '.txt')),
+					`${formatCode(result)}\n`
+				);
 			}
 		}
 	}

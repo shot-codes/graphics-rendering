@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import hljs from 'highlight.js';
 
 	let canvas: HTMLCanvasElement;
 	const canvasWidth = 512;
@@ -44,11 +43,7 @@
 			];
 		};
 
-		const vertices = new Float32Array([
-			...createPoint([0, 0], 20),
-			...createPoint([1, 1], 20),
-			...createPoint([1, 0], 20),
-		]);
+		const vertices = new Float32Array([...createPoint([0, 0], 256)]);
 
 		const vertexBuffer = device.createBuffer({
 			label: 'Cell vertices',
@@ -80,7 +75,7 @@ fn vertexMain(@location(0) pos: vec2f) ->
 
 @fragment
 fn fragmentMain() -> @location(0) vec4f {
-  return vec4f(0, 0, 0, 1); // (Red, Green, Blue, Alpha)
+  return vec4f(1, 1, 1, 1); // (Red, Green, Blue, Alpha)
 }
   `,
 		});
@@ -123,5 +118,5 @@ fn fragmentMain() -> @location(0) vec4f {
 	});
 </script>
 
-<h2>Part 2</h2>
+<h2>Part 4</h2>
 <canvas bind:this={canvas} class="w-[{canvasWidth}px] h-[{canvasHeight}px] mx-auto" />

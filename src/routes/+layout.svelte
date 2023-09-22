@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import type { LayoutData } from './$types';
 	// import 'highlight.js/styles/github.css';
 
 	let stylesheetUrl: string;
