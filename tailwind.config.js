@@ -9,14 +9,14 @@ export default {
 				md: '728px',
 				lg: '728px',
 				xl: '728px',
-				'2xl': '728px'
-			}
+				'2xl': '728px',
+			},
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Iosevka Sans']
-			}
-		}
+				sans: ['Iosevka Sans'],
+			},
+		},
 	},
-	plugins: []
+	plugins: [],
 };

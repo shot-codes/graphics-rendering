@@ -147,7 +147,7 @@ WebGLUtils = (function () {
 
 	return {
 		create3DContext: create3DContext,
-		setupWebGL: setupWebGL
+		setupWebGL: setupWebGL,
 	};
 })();
 
