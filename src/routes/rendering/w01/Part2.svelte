@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import hljs from 'highlight.js';
+	import shader from './shaders/Part2.wgsl?raw';
 
 	let canvas: HTMLCanvasElement;
 	const canvasWidth = 512;
@@ -26,29 +26,7 @@
 
 		const encoder = device.createCommandEncoder();
 
-		const createPoint = (center: [number, number], size: number) => {
-			return [
-				center[0] + -size / canvasWidth,
-				center[1] + -size / canvasHeight,
-				center[0] + size / canvasWidth,
-				center[1] + -size / canvasHeight,
-				center[0] + size / canvasWidth,
-				center[1] + size / canvasHeight,
-
-				center[0] + -size / canvasWidth,
-				center[1] + -size / canvasHeight,
-				center[0] + size / canvasWidth,
-				center[1] + size / canvasHeight,
-				center[0] + -size / canvasWidth,
-				center[1] + size / canvasHeight,
-			];
-		};
-
-		const vertices = new Float32Array([
-			...createPoint([0, 0], 20),
-			...createPoint([1, 1], 20),
-			...createPoint([1, 0], 20),
-		]);
+		const vertices = new Float32Array([-0.9, -0.9, -0.9, 0.9, 0.9, 0.9, 0.9, -0.9, -0.9, -0.9]);
 
 		const vertexBuffer = device.createBuffer({
 			label: 'Cell vertices',
@@ -71,23 +49,15 @@
 
 		const cellShaderModule = device.createShaderModule({
 			label: 'Cell shader',
-			code: `
-@vertex
-fn vertexMain(@location(0) pos: vec2f) ->
-  @builtin(position) vec4f {
-  return vec4f(pos, 0, 1);
-}
-
-@fragment
-fn fragmentMain() -> @location(0) vec4f {
-  return vec4f(0, 0, 0, 1); // (Red, Green, Blue, Alpha)
-}
-  `,
+			code: shader,
 		});
 
 		const cellPipeline = device.createRenderPipeline({
 			label: 'Cell pipeline',
 			layout: 'auto',
+			primitive: {
+				topology: 'triangle-strip',
+			},
 			vertex: {
 				module: cellShaderModule,
 				entryPoint: 'vertexMain',
@@ -109,7 +79,7 @@ fn fragmentMain() -> @location(0) vec4f {
 				{
 					view: context.getCurrentTexture().createView(),
 					loadOp: 'clear',
-					clearValue: { r: 0.3921, g: 0.5843, b: 0.9294, a: 1.0 },
+					clearValue: { r: 0, g: 0, b: 0, a: 1.0 },
 					storeOp: 'store',
 				},
 			],
