@@ -67,6 +67,12 @@
 		const cellShaderModule = device.createShaderModule({
 			label: 'Cell shader',
 			code: `
+struct MyStruct {
+  color: vec4f,
+  scale: vec2f,
+  offset: vec2f,
+}
+
 @vertex
 fn vertexMain(@location(0) pos: vec2f) ->
   @builtin(position) vec4f {
