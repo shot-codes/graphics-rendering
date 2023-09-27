@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import hljs from 'highlight.js';
+	import shader from './shaders/Part2.wgsl?raw';
 
 	let canvas: HTMLCanvasElement;
 	const canvasWidth = 512;
@@ -71,18 +71,7 @@
 
 		const cellShaderModule = device.createShaderModule({
 			label: 'Cell shader',
-			code: `
-@vertex
-fn vertexMain(@location(0) pos: vec2f) ->
-  @builtin(position) vec4f {
-  return vec4f(pos, 0, 1);
-}
-
-@fragment
-fn fragmentMain() -> @location(0) vec4f {
-  return vec4f(0, 0, 0, 1); // (Red, Green, Blue, Alpha)
-}
-  `,
+			code: shader,
 		});
 
 		const cellPipeline = device.createRenderPipeline({
