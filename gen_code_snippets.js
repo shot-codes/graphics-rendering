@@ -47,6 +47,7 @@ async function processFiles() {
 		for (const subDir of subDirs) {
 			const dir = join(baseDir, subDir);
 
+			// Process svelte files
 			const files = await readdir(dir);
 			const svelteFiles = files.filter((file) => /^Part\d+\.svelte$/.test(file));
 
@@ -62,6 +63,26 @@ async function processFiles() {
 					join(staticDir, file.replace('.svelte', '.txt')),
 					`${formatCode(result)}\n`
 				);
+			}
+
+			// Process wgsl files
+			const shaderDir = join(dir, 'shaders');
+			try {
+				const wgslFiles = (await readdir(shaderDir)).filter((file) => file.endsWith('.wgsl'));
+				for (const file of wgslFiles) {
+					const data = await readFile(join(shaderDir, file), 'utf8');
+					const staticDir = shaderDir.replace('src', 'static').replace('routes', 'source');
+					await mkdir(staticDir, { recursive: true });
+					await writeFile(join(staticDir, file.replace('.wgsl', '.wgsl.txt')), `${data}\n`);
+				}
+			} catch (error) {
+				if (error.code === 'ENOENT') {
+					// Directory does not exist, skip to next iteration
+					continue;
+				} else {
+					// Some other error occurred
+					throw error;
+				}
 			}
 		}
 	}

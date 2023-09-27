@@ -9,17 +9,17 @@
 </script>
 
 <h1>Getting started with WebGL (or WebGPU)</h1>
-<Part sourceString={data.graphics.w01.Part1}>
+<Part source={data.graphics.w01.Part1}>
 	<Part1 />
 </Part>
 
-<Part sourceString={data.graphics.w01.Part2}>
+<Part source={data.graphics.w01.Part2}>
 	<Part2 />
 </Part>
 
-<Part sourceString={data.graphics.w01.Part3}>
+<Part source={data.graphics.w01.Part3}>
 	<Part3 />
 </Part>
-<Part sourceString={data.graphics.w01.Part4}>
+<Part source={data.graphics.w01.Part4}>
 	<Part4 />
 </Part>

@@ -4,7 +4,10 @@ import { error } from '@sveltejs/kit';
 import { join } from 'path';
 
 interface PartData {
-	[part: string]: string;
+	[part: string]: {
+		source: string | undefined;
+		shader: string | undefined;
+	};
 }
 
 interface WDirData {
@@ -27,6 +30,7 @@ async function readAllFiles(): Promise<BaseDirData> {
 		for (const wDir of wDirs) {
 			result[baseDir][wDir] = {};
 
+			// Handle svelte files
 			const files: string[] = await readdir(join('static', 'source', baseDir, wDir));
 			const txtFiles: string[] = files.filter(
 				(file) => file.startsWith('Part') && file.endsWith('.txt')
@@ -35,11 +39,29 @@ async function readAllFiles(): Promise<BaseDirData> {
 			for (const file of txtFiles) {
 				const part: string = file.slice(0, -4); // Remove '.txt' from the filename
 				const data: string = await readFile(join('static', 'source', baseDir, wDir, file), 'utf-8');
-				result[baseDir][wDir][part] = data;
+				result[baseDir][wDir][part] = { source: data, shader: undefined };
+			}
+
+			// Handle wgsl files
+			const shaderDir = join('static', 'source', baseDir, wDir, 'shaders');
+			try {
+				const shaderFiles = await readdir(shaderDir);
+				const wgslFiles = shaderFiles.filter(
+					(file) => file.startsWith('Part') && file.endsWith('.wgsl.txt')
+				);
+
+				for (const file of wgslFiles) {
+					const part = file.slice(0, -9); // Remove '.wgsl.txt' from the filename
+					const data = await readFile(join(shaderDir, file), 'utf-8');
+					if (result[baseDir][wDir][part]) {
+						result[baseDir][wDir][part].shader = data;
+					}
+				}
+			} catch (error) {
+				continue;
 			}
 		}
 	}
-
 	return result;
 }
 

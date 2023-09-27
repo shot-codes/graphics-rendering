@@ -10,14 +10,14 @@
 
 <h1>Introduction</h1>
 
-<Part sourceString={data.rendering.w01.Part1}>
+<Part source={data.rendering.w01.Part1}>
 	<Part1 />
 </Part>
 
-<Part sourceString={data.rendering.w01.Part2}>
+<Part source={data.rendering.w01.Part2}>
 	<Part2 />
 </Part>
 
-<Part sourceString={data.rendering.w01.Part3}>
+<Part source={data.rendering.w01.Part3}>
 	<Part3 />
 </Part>

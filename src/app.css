@@ -22,13 +22,6 @@ html {
 	@apply dark:bg-[#0f0f0f] dark:text-neutral-100;
 }
 
-pre {
-	@apply px-4 dark:bg-[#202020] bg-[#f5f5f5] border dark:border-[#202020] rounded-md my-4 overflow-x-scroll;
-}
-code {
-	@apply text-sm overflow-x-scroll;
-}
-
 h1 {
 	font-weight: bold;
 	font-size: 2em;
