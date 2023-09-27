@@ -59,10 +59,7 @@ async function processFiles() {
 				let result = visit(sourceFile, sourceFile);
 				const staticDir = dir.replace('src', 'static').replace('routes', 'source');
 				await mkdir(staticDir, { recursive: true });
-				await writeFile(
-					join(staticDir, file.replace('.svelte', '.txt')),
-					`${formatCode(result)}\n`
-				);
+				await writeFile(join(staticDir, file.replace('.svelte', '.txt')), `${formatCode(result)}`);
 			}
 
 			// Process wgsl files
@@ -73,7 +70,7 @@ async function processFiles() {
 					const data = await readFile(join(shaderDir, file), 'utf8');
 					const staticDir = shaderDir.replace('src', 'static').replace('routes', 'source');
 					await mkdir(staticDir, { recursive: true });
-					await writeFile(join(staticDir, file.replace('.wgsl', '.wgsl.txt')), `${data}\n`);
+					await writeFile(join(staticDir, file.replace('.wgsl', '.wgsl.txt')), `${data.trimEnd()}`);
 				}
 			} catch (error) {
 				if (error.code === 'ENOENT') {

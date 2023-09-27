@@ -17,4 +17,3 @@ fn fragmentMain(@location(0) coords: vec2f) -> @location(0) vec4f {
   let uv = coords * 0.5;
   return vec4f(0.1, 0.3, 0.6, 1);
 }
-
