@@ -124,5 +124,4 @@ fn fragmentMain() -> @location(0) vec4f {
 	});
 </script>
 
-<h2>Part 4</h2>
 <canvas bind:this={canvas} class="w-[{canvasWidth}px] h-[{canvasHeight}px] mx-auto" />

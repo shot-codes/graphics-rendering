@@ -8,18 +8,29 @@
 	export let data: PageData;
 </script>
 
-<h1>Getting started with WebGL (or WebGPU)</h1>
-<Part source={data.graphics.w01.Part1}>
-	<Part1 />
-</Part>
+<div class="px-6">
+	<h1 class="text-center">Getting started with WebGL (or WebGPU)</h1>
+	<Part source={data.graphics.w01.Part1}>
+		<Part1 />
+	</Part>
 
-<Part source={data.graphics.w01.Part2}>
-	<Part2 />
-</Part>
+	<Part source={data.graphics.w01.Part2}>
+		<h2>Part 2</h2>
+		<Part2 />
+	</Part>
 
-<Part source={data.graphics.w01.Part3}>
-	<Part3 />
-</Part>
-<Part source={data.graphics.w01.Part4}>
-	<Part4 />
-</Part>
+	<Part source={data.graphics.w01.Part3}>
+		<h2>Part 3</h2>
+		<Part3 />
+	</Part>
+	<Part source={data.graphics.w01.Part4}>
+		<h2>Part 4</h2>
+		<Part4 />
+	</Part>
+</div>
+
+<style lang="postcss">
+	h2 {
+		@apply pl-2;
+	}
+</style>

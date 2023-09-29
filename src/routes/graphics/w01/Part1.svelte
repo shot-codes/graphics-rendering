@@ -38,5 +38,13 @@
 	});
 </script>
 
-<h2>Part 1</h2>
-<canvas bind:this={canvas} class="w-[512px] h-[512px] mx-auto" />
+<div
+	class="dark:bg-[#202020] bg-[#f5f5f5] dark:border-[#303030] border-[#aaaaaa] border rounded-md flex flex-col"
+>
+	<span
+		class="dark:bg-[#151515] bg-[#e3e3e3] rounded-t-md mb-4 p-2 px-4 border-b border-[#aaaaaa] dark:border-[#303030] font-bold"
+	>
+		Part 1</span
+	>
+	<canvas bind:this={canvas} class="w-[512px] h-[512px] m-3" />
+</div>

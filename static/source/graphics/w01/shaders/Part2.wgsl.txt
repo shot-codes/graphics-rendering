@@ -6,5 +6,5 @@ fn vertexMain(@location(0) pos: vec2f) ->
 
 @fragment
 fn fragmentMain() -> @location(0) vec4f {
-  return vec4f(0, 0, 0, 1); // (Red, Green, Blue, Alpha)
+  return vec4f(0, 0, 0, 1); // (Red, Green, Blue, Alpha) asdfasjdlkfja ;skldjfa;lsdksdjf;al skjdf;lak jsd;lkfj a;lskdjf ;alsdfkj
 }

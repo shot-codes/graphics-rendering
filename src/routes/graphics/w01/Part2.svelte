@@ -112,5 +112,4 @@
 	});
 </script>
 
-<h2>Part 2</h2>
 <canvas bind:this={canvas} class="w-[{canvasWidth}px] h-[{canvasHeight}px] mx-auto" />

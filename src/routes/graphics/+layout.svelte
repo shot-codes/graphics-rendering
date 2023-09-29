@@ -75,7 +75,8 @@
 			class:text-blue-500={$page.url.href.includes('w10')}>WORKSHEET_10</a
 		>
 	</div>
-	<div class="my-32">
-		<slot />
-	</div>
+</div>
+
+<div class="my-32">
+	<slot />
 </div>

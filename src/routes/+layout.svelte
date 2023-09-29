@@ -31,7 +31,7 @@
 
 <div class="grid h-full grid-rows-[150px_1fr]">
 	<div
-		class="fixed top-0 w-full h-[40px] items-center flex justify-center bg-white bg-opacity-50 dark:bg-[#0f0f0f] dark:bg-opacity-50 p-2 backdrop-blur"
+		class="fixed z-50 top-0 w-full h-[40px] items-center flex justify-center bg-white bg-opacity-50 dark:bg-[#0f0f0f] dark:bg-opacity-50 p-2 backdrop-blur"
 	>
 		<a href="/"> 02561/02562 JOURNAL - S155932 </a>
 	</div>
