@@ -83,6 +83,7 @@ async function processFiles() {
 			}
 		}
 	}
+	console.log('Files processed');
 }
 
 processFiles();
